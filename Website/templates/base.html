@@ -47,19 +47,22 @@
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbar">
             <div class="navbar-nav">
-                <img src="https://kitchenbusiness.com/wp-content/uploads/Pizza-restaurant-names.jpg" alt="Pizza Icon" class="rounded-circle img-fluid"
-                style="height: 36px;"> 
+                <img src="https://kitchenbusiness.com/wp-content/uploads/Pizza-restaurant-names.jpg" alt="Pizza Icon" class="rounded-circle img-fluid" style="height: 36px;"> 
                 <p class="navbar-brand mb-0 h1">Staten Island Slices</p>
                 <a class="nav-item nav-link" id="home" href="/">Home</a>
-                {% if user.is_authenticated %}
-                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                {% if user.is_authenticated and user.id %}
+                    {% if user.is_admin %}
+                        <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
+                    {% else %}
+                        <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                    {% endif %}
                 {% else %}
-                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-                <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                    <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                    <a class="nav-item nav-link" id="login" href="/login">Login</a>
                 {% endif %}
                 <a class="nav-item nav-link" id="cart" href="/checkout"><i class="fas fa-shopping-cart"></i></a>
-
             </div>
+            
         </div>
     </nav>
 
@@ -94,7 +97,7 @@
 
     <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
-            <span class="text-muted">Your footer content goes here</span>
+            <span class="text-muted">Footer</span>
         </div>
     </footer>
 

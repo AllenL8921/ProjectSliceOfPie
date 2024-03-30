@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Cart
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -45,9 +45,9 @@ def sign_up():
     if request.method == "POST":
         email = request.form.get("email")
         firstName = request.form.get("firstName")
-        lastName = request.form.get("lastName")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
+        is_admin = request.form.get("is_admin")
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -66,6 +66,7 @@ def sign_up():
                 email=email,
                 firstName=firstName,
                 password=generate_password_hash(password1, method="pbkdf2:sha256"),
+                is_admin=is_admin == "on",
             )
 
             # add user to database
@@ -77,6 +78,36 @@ def sign_up():
             return redirect(url_for("views.home"))
 
     return render_template("sign_up.html", user=current_user)
+
+
+@auth.route("/{{item.id}}/add_to_cart", methods=["POST", "GET"])
+def add_to_cart(mug_id):
+
+    if current_user.is_authenticated:
+        user_id = current_user.id
+        cart_item = Cart.query.filter_by(
+            cartItem_id=cartItem_id, user_id=user_id
+        ).first()
+
+        # Already Exists, increment item quantity
+        if cart_item:
+            cart_item.quantity += 1
+            cart_item.saveToDB()
+        else:
+            cart = Cart(mug_id=mug_id, user_id=user_id, quantity=1)
+            cart.saveToDB()
+    else:
+        flash("You need to log in to add items to your cart", category="danger")
+        return redirect(url_for("auth.loginPage"))
+    return redirect(url_for("checkout.html", user=current_user))
+
+
+@auth.route("/admin")
+def admin():
+    if current_user.is_authenticated:
+        user_id = current_user.id
+
+    return render_template("admin.html", user=current_user)
 
 
 @auth.route("/checkout")

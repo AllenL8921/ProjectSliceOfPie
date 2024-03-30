@@ -1,46 +1,157 @@
 {% extends "base.html" %} {% block title %} Home{% endblock %} {% block content
 %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <img
-        src="https://kitchenbusiness.com/wp-content/uploads/Pizza-restaurant-names.jpg"
-        class="rounded-circle img-fluid"
-        style="height: auto; width: 100%"
-      />
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <style>
+    .carousel>.carousel-inner>.carousel-item>img {
+      width: auto;
+      /* Yeap you can change the width and height*/
+      height: 800px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--carousel-->
+  <div class="container center">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="2000">
+          <img class="d-block w-100"
+            src="https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg"
+            class="d-block w-100" alt="cheese pizza">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Classic Cheese Pizza</h5>
+            <p>Indulge in the timeless simplicity of our Classic Cheese Pizza, where each bite is a celebration of pure,
+              unadulterated flavor. Crafted with meticulous attention to detail, this pizza is a symphony of premium
+              ingredients harmonizing on a golden crust.</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img class="d-block w-100"
+            src="https://www.marionskitchen.com/wp-content/uploads/2023/02/Asian-Buffalo-Wings-04.jpg"
+            class="d-block w-100" alt="buffalo_wings">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Buffalo wings</h5>
+            <p>Prepare your taste buds for a fiery adventure with our Spicy Buffalo Wings, a culinary delight that's
+              sure to tantalize your senses. Bursting with flavor and heat, these wings are a perfect balance of tender
+              meat and bold spices, creating an unforgettable experience with every bite.</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img class="d-block w-100"
+            src="https://images.themodernproper.com/billowy-turkey/production/posts/2021/Homemade-Mozzarella-Sticks-9.jpeg?w=960&h=960&q=82&fm=jpg&fit=crop&dm=1638935116&s=2574b8da89d966ee167111e9822a0b4e"
+            class="d-block w-100" alt="MozzarellaSticks">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Mozzarella sticks</h5>
+            <p>Prepare to embark on a journey of crispy, gooey indulgence with our Golden Mozzarella Sticks. These
+              delectable appetizers are a celebration of melting cheese encased in a golden, crunchy coating, creating a
+              symphony of textures and flavors with every bite.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div><!--carousel-->
+  </div> <!-- container-->
+
+  <!--Second-->
+  <div class="container">
+    <div class="jumbotorn">
+      <h1 class="display-4">Cozy Pizza Store!</h1>
+
+      <p class="lead"> Welcome to our cozy pizza joint, where every slice tells a delicious story! At our pizzeria, we
+        craft each pie with
+        passion and precision, using only the finest ingredients sourced locally and internationally. Join us for a
+        slice of
+        happiness today!</p>
     </div>
-    <div class="col-md-6">
-      <h1 class="display-4 mb-4">Welcome to our cozy pizza joint!</h1>
-      <p class="lead">
-        At our pizzeria, every slice tells a delicious story. We craft each pie
-        with passion and precision, using only the finest ingredients sourced
-        locally and internationally.
-      </p>
-      <p>Join us for a slice of happiness today!</p>
+  </div>
+  <br>
+
+  <!--Third - Menu-->
+  <div class="container">
+    <h1>Menu</h1>
+    <hr>
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <img class="card-img-top" style="height:299px"
+            src="https://media.discordapp.net/attachments/1215044332957212742/1223407570526535781/Pizza_No_Toppings.png?ex=6619be16&is=66074916&hm=a36f55a7bafd785722b391d36b93f417e5a234693c948c0ec24fd82cf58efa52&=&format=webp&quality=lossless&width=477&height=468"
+            alt="pizza">
+          <h3 class="card-title"> Cheese Pizza</h3>
+          <h4 class="card-title text-success"> $16.99 <button type="submit" class="btn btn-primary">Add to Cart</button></h4>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <img class="card-img-top" style="height:299px"
+            src="https://media.discordapp.net/attachments/1215044332957212742/1223407569889136680/buffalo_wings.png?ex=6619be16&is=66074916&hm=5d8b15eee68fa4e688be9464b78f51ed2d7a8279a77c760b30a09b8f85a219ea&=&format=webp&quality=lossless&width=474&height=468"
+            alt="Buffalo wings">
+          <h3 class="card-title"> Buffalo Wings</h3>
+          <h4 class="card-title text-success"> $9.99 <button type="submit" class="btn btn-primary">Add to Cart</button></h4>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <img class="card-img-top" style="height:299px"
+            src="https://media.discordapp.net/attachments/1215044332957212742/1223407570190860298/MozzarellaSticks.png?ex=6619be16&is=66074916&hm=3f9d530fcaeec44e5ab5e712df22a72479ee50804befed0d0bbf0fbd01716b3b&=&format=webp&quality=lossless&width=475&height=468"
+            alt="MozzarellaSticks">
+          <h3 class="card-title"> Mozzarella Sticks</h3>
+          <h4 class="card-title text-success"> $6.99 <button type="submit" class="btn btn-primary">Add to Cart</button></h4>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div class="card">
+          <img class="card-img-top" style="height:299px"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtoGOxjDwnkHyGMWN1k9GXFr-JbO4jOxTjsQ&usqp=CAU"
+            alt="drink">
+          <h3 class="card-title"> Cola</h3>
+          <h4 class="card-title text-success"> $1.99 <button type="submit" class="btn btn-primary"><a href="" class="card-link" style="color:white; text-decoration:none">Add to Cart</a></button>
+          </h4>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
-
-<div class="container">
-  <h1>Pizza Place Menu</h1>
-
-  <div class="menu-item">
-    <h2>Classic Margherita</h2>
-    <p>Tomato Sauce, Fresh Mozzarella, Basil</p>
-    <p>$10.99</p>
+  <!--Order-->
+  <div class="container">
+    <hr>March 29 2024- Team LGRJ
   </div>
+  <br>
+</body>
 
-  <div class="menu-item">
-    <h2>Pepperoni Pizza</h2>
-    <p>Tomato Sauce, Mozzarella Cheese, Pepperoni Slices</p>
-    <p>$12.99</p>
-  </div>
-
-  <div class="menu-item">
-    <h2>Hawaiian Pizza</h2>
-    <p>Tomato Sauce, Mozzarella Cheese, Ham, Pineapple</p>
-    <p>$11.99</p>
-  </div>
-
+</html>
   {% endblock %}
 </div>

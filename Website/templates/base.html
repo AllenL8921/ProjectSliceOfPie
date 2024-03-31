@@ -53,7 +53,6 @@
                 {% if user.is_authenticated and user.id %}
                     {% if user.is_admin %}
                         <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
-                    {% else %}
                         <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                     {% endif %}
                 {% else %}

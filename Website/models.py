@@ -27,9 +27,9 @@ class Cart(db.Model):
     cartItem_id = db.Column(db.Integer, db.ForeignKey("item.id"), nullable=False)
     quantity = db.Column(db.Integer, default=1)
 
-    def __init__(self, user_id, mug_id, quantity=1):
+    def __init__(self, user_id, cartItem_id, quantity=1):
         self.user_id = user_id
-        self.mug_id = mug_id
+        self.cartItem_id = cartItem_id
         self.quantity = quantity
 
     def update_quantity(self, quantity):
@@ -49,6 +49,7 @@ class Cart(db.Model):
 # Create Schema for object
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    is_admin = db.Column(db.Boolean, default=False)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     firstName = db.Column(db.String(255))

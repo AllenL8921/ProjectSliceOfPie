@@ -47,7 +47,7 @@ def sign_up():
         firstName = request.form.get("firstName")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
-        is_admin = request.form.get("is_admin")
+        isAdmin = request.form.get("is_admin")
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -66,7 +66,7 @@ def sign_up():
                 email=email,
                 firstName=firstName,
                 password=generate_password_hash(password1, method="pbkdf2:sha256"),
-                is_admin=is_admin == "on",
+                is_admin=(isAdmin == "on"),
             )
 
             # add user to database
@@ -80,9 +80,8 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-@auth.route("/{{item.id}}/add_to_cart", methods=["POST", "GET"])
-def add_to_cart(mug_id):
-
+@auth.route("/<int:item_id>/add_to_cart", methods=["POST"])
+def add_to_cart(item_id):
     if current_user.is_authenticated:
         user_id = current_user.id
         cart_item = Cart.query.filter_by(
@@ -94,7 +93,7 @@ def add_to_cart(mug_id):
             cart_item.quantity += 1
             cart_item.saveToDB()
         else:
-            cart = Cart(mug_id=mug_id, user_id=user_id, quantity=1)
+            cart = Cart(user_id=user_id, cart_item=cart_item, quantity=1)
             cart.saveToDB()
     else:
         flash("You need to log in to add items to your cart", category="danger")

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User, Cart
+from .models import User, Item, Cart
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -73,7 +73,7 @@ def sign_up():
             db.session.add(new_user)
             db.session.commit()
             flash("Account created!", category="success")
-            login_user(user, remember=True)
+            login_user(new_user, remember=True)
 
             return redirect(url_for("views.home"))
 
@@ -83,28 +83,50 @@ def sign_up():
 @auth.route("/<int:item_id>/add_to_cart", methods=["POST"])
 def add_to_cart(item_id):
     if current_user.is_authenticated:
-        user_id = current_user.id
-        cart_item = Cart.query.filter_by(
-            cartItem_id=cartItem_id, user_id=user_id
-        ).first()
+        userId = current_user.id
+        cart_item = Cart.query.filter_by(cartItem_id=item_id, user_id=userId).first()
 
         # Already Exists, increment item quantity
         if cart_item:
             cart_item.quantity += 1
             cart_item.saveToDB()
         else:
-            cart = Cart(user_id=user_id, cart_item=cart_item, quantity=1)
+            cart = Cart(user_id=userId, cartItem_id=item_id, quantity=1)
             cart.saveToDB()
     else:
         flash("You need to log in to add items to your cart", category="danger")
         return redirect(url_for("auth.loginPage"))
-    return redirect(url_for("checkout.html", user=current_user))
+    return redirect(url_for("checkout", user=current_user))
 
 
-@auth.route("/admin")
+@auth.route("/items")
+def display_items():
+    # Query items from the database
+    items = (
+        Item.query.all()
+    )  # Retrieve all items, you can use more complex queries as needed
+
+    # Render the HTML template with the items
+    return render_template("items.html", items=items)
+
+
+@auth.route("/admin", methods=["GET", "POST"])
 def admin():
-    if current_user.is_authenticated:
-        user_id = current_user.id
+    if request.method == "POST":
+        itemName = request.form.get("itemName")
+        itemPrice = request.form.get("itemPrice")
+
+        item = Item.query.filter_by(name=itemName).first()
+
+        if item:
+            flash("Item already exists.", category="error")
+        else:
+            newItem = Item(name=itemName, price=itemPrice)
+
+            db.session.add(newItem)
+            db.session.commit()
+
+            flash("Item added.", category="success")
 
     return render_template("admin.html", user=current_user)
 

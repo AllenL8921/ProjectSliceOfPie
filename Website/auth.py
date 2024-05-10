@@ -80,7 +80,7 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-@auth.route("/<int:item_id>/add_to_cart", methods=["POST"])
+@auth.route("/add_to_cart/<int:item_id>", methods=["POST"])
 def add_to_cart(item_id):
     if current_user.is_authenticated:
         userId = current_user.id
@@ -89,25 +89,28 @@ def add_to_cart(item_id):
         # Already Exists, increment item quantity
         if cart_item:
             cart_item.quantity += 1
-            cart_item.saveToDB()
         else:
             cart = Cart(user_id=userId, cartItem_id=item_id, quantity=1)
-            cart.saveToDB()
+            db.session.add(cart)
+
+        db.session.commit()  # Commit changes to the database
     else:
         flash("You need to log in to add items to your cart", category="danger")
-        return redirect(url_for("auth.loginPage"))
-    return redirect(url_for("checkout", user=current_user))
+        return redirect(url_for("auth.login"))
+
+    return redirect(url_for("auth.display_items"))
 
 
 @auth.route("/items")
 def display_items():
     # Query items from the database
     items = (
-        Item.query.all()
-    )  # Retrieve all items, you can use more complex queries as needed
+        # Item.query.all()
+        Item.query.with_entities(Item.id, Item.name, Item.price).all()
+    )
 
     # Render the HTML template with the items
-    return render_template("items.html", items=items)
+    return render_template("items.html", items=items, user=current_user)
 
 
 @auth.route("/admin", methods=["GET", "POST"])
@@ -133,4 +136,14 @@ def admin():
 
 @auth.route("/checkout")
 def checkout():
-    return render_template("checkout.html", user=current_user)
+    # Fetch cart items for the current user
+    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+
+    # Create a list of dictionaries containing item details and quantities
+    cart = []
+    for cart_item in cart_items:
+        item = Item.query.get(cart_item.cartItem_id)
+        if item:
+            cart.append({"item_name": item.name, "quantity": cart_item.quantity})
+
+    return render_template("checkout.html", cart=cart, user=current_user)

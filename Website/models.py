@@ -16,9 +16,9 @@ class Invoice(db.Model):
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    description = db.Column(db.String(255))
+    # description = db.Column(db.String(255))
     price = db.Column(db.Float)
-    addOn = db.Column(db.String(255))
+    # addOn = db.Column(db.String(255))
     calories = db.Column(db.Integer)
 
     def __repr__(self):

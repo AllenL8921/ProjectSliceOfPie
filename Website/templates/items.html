@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,10 +10,14 @@
     <h1>Items</h1>
     <ul>
       {% for item in items %}
-      <li>{{ item.name }} - {{ item.price }}</li>
+      <li>
+        {{ item.name }} - {{ item.price }}
+        <form action="/add_to_cart/{{ item.id }}" method="POST">
+          <button type="submit" class="btn btn-success">Add to Cart</button>
+        </form>
+      </li>
       {% endfor %}
     </ul>
   </body>
 </html>
-
 {% endblock %}

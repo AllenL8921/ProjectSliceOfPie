@@ -1,0 +1,56 @@
+{% extends 'base.html' %}{% block content %}
+<h1 style="text-align:center; margin:4.5rem 0 2rem 0; font-weight:500; font-size: 60px; text-shadow:0 0 0.1em rgb(255, 255, 255)">Cart:</h1>
+
+<div class="d-flex justify-content-center flex-wrap">
+    
+</div>
+
+<div class="card text-center" style="width: 100%; border: 1px solid black">
+    <div class="card-body">
+        <h5 class="card-title">Total:</h5>
+        <p class="card-text">$some amount</p>
+
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Clear Cart
+            </button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <a href = "/checkout" style="color: white">Checkout</a>
+            </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">This will clear all items in your cart!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a class="btn btn-danger" href="">Clear Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thank you for shopping at MeanMugs!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Click 'Submit' to complete your order. Your card will be charged and items will be shipped.
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" href="">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}

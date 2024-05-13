@@ -34,15 +34,60 @@ def add_to_cart(item_id):
         if cart_item:
             cart_item.quantity += 1
         else:
-            cart = Cart(user_id=userId, cartItem_id=item_id, quantity=1)
+            cart = Cart(user_id=userId, cartItem_id=item_id, quantity=1) #creates new cart connected to the user's id
             db.session.add(cart)
 
         db.session.commit()  # Commit changes to the database
     else:
         flash("You need to log in to add items to your cart", category="danger")
-        return redirect(url_for("views.login"))
+        return redirect(url_for("auth.login"))
 
     return redirect(url_for("views.cart"))
+
+
+@views.route("/remove_from_cart/<int:item_id>", methods=["POST"])
+def rmv_from_cart(item_id):
+    cart_item = Cart.query.filter_by(cartItem_id=item_id, user_id=current_user.id).first()
+
+    if not cart_item:
+        return redirect(url_for("auth.login")) #if for some reason bugged, reload cart
+
+    cart_item.deleteFromDB()
+
+    return redirect(url_for('views.cart')) # reload cart with update
+
+
+@views.route("/increment_quantity/<int:item_id>", methods=["POST"])
+def increment_quantity(item_id):
+    user_id = current_user.id
+    cart_item = Cart.query.filter_by(cartItem_id=item_id, user_id=user_id).first()
+
+    if not cart_item:
+        return redirect(url_for('views.cart'))
+    
+    cart_item.quantity += 1
+    db.session.commit()
+
+    return redirect(url_for('views.cart'))
+
+
+@views.route("/decrement_quantity/<int:item_id>", methods=["POST"])
+def decrement_quantity(item_id):
+    user_id = current_user.id
+    cart_item = Cart.query.filter_by(cartItem_id=item_id, user_id=user_id).first()
+
+    if not cart_item:
+        return redirect(url_for('views.cart'))
+    
+    if(cart_item.quantity==1):
+        db.session.delete(cart_item)
+
+    if(cart_item.quantity>0):
+        cart_item.quantity -= 1
+
+    db.session.commit()
+
+    return redirect(url_for('views.cart'))
 
 
 #intermediary between "/items" and "/checkout" MENU -> CART -> CHECKOUT. 
@@ -51,19 +96,19 @@ def add_to_cart(item_id):
 def cart():
     if current_user.is_authenticated:
         cart_items = Cart.query.filter_by(user_id=current_user.id).all()
-        sub_total = 0
         cart = []
+        sub_total = 0
         for cart_item in cart_items:
             item = Item.query.get(cart_item.cartItem_id)
             if item:
-                cart.append({"item_name": item.name, 
-                            "quantity": cart_item.quantity
-                            })
+                total_items_price = item.price * cart_item.quantity
+                sub_total += total_items_price
+                cart.append({"item_id": item.id, "item_name": item.name,"quantity": cart_item.quantity, "price": total_items_price})
     else:
         flash("You need to log in to add items to your cart", category="danger")
-        return redirect(url_for("views.login"))
+        return redirect(url_for("auth.login"))
 
-    return render_template("cart.html", cart=cart, user=current_user)
+    return render_template("cart.html", cart=cart, user=current_user, sub_total=sub_total)
 
 
 #final price and payment is determined

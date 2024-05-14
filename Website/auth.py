@@ -98,6 +98,18 @@ def admin():
             db.session.commit()
 
             flash("Item added.", category="success")
+    curr_items = Item.query.with_entities(Item.id, Item.name, Item.price).all()
+    return render_template("admin.html", items=curr_items, user=current_user)
 
-    return render_template("admin.html", user=current_user)
 
+@auth.route("/admin_delete_item/<int:item_id>", methods=["POST"])
+def admin_delete_item(item_id):
+    item = Item.query.filter_by(id=item_id).first()
+
+    if item:
+            db.session.delete(item)
+            db.session.commit()
+            message = f"Removed item: {item.name}"
+            flash(message, category="success")
+
+    return redirect(url_for('auth.admin'))

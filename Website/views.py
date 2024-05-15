@@ -153,7 +153,7 @@ def add_to_cart_STATIC(item_id):
         userId = current_user.id
         cart_item = Cart.query.filter_by(cartItem_id=item_id, user_id=userId).first()
 
-        if cart_item:
+        if cart_item and item:
             cart_item.quantity += 1
         else:
             match item_id:
@@ -219,7 +219,7 @@ def add_to_cart_STATIC(item_id):
                     db.session.add(cart)
                 case 11:
                     if not item:
-                        newItem = Item(id = 11,name='Orange, fennel and pea shoot salad with walnuts', price=8.99)
+                        newItem = Item(id = 11,name='Majito', price=8.99)
                         db.session.add(newItem)
                     cart = Cart(user_id=userId, cartItem_id=11, quantity=1)
                     db.session.add(cart)

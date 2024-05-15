@@ -1,6 +1,40 @@
 {% extends "base.html" %} {%block title%} Admin View{% endblock %} {% block
 content %}
 
+<head>
+  <style>
+      .x{
+          display: inline-block;
+          content: "\00d7"; /* This will render the 'X' */
+      }   
+  </style>
+</head>
+<br>
+<h3 align="center">Remove Items</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Item ID</th>
+      <th>Name</th>
+      <th>Delete?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>
+          <form action= '/admin_delete_item/{{ item.id }}' method="POST">
+              <button>&times;</button>
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br>
+
 <form method="POST">
   <h3 align="center">Add Item</h3>
   <div class="form-group">
@@ -27,5 +61,7 @@ content %}
   <br />
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
 
 {% endblock %}

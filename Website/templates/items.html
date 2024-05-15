@@ -10,12 +10,14 @@
     <h1>Items</h1>
     <ul>
       {% for item in items %}
+      <br>
       <li>
-        {{ item.name }} - {{ item.price }}
+        {{ item.name }} - ${{ item.price }}
         <form action="/add_to_cart/{{ item.id }}" method="POST">
           <button type="submit" class="btn btn-success">Add to Cart</button>
         </form>
       </li>
+      </br>
       {% endfor %}
     </ul>
   </body>

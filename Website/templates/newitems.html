@@ -1,0 +1,222 @@
+{% extends "base.html" %} {% block title %}Menu{% endblock %} {% block content%}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Menu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <style>
+
+      .container>h3{
+        color:#cea674;
+        font-style:italic;
+      }
+
+      .container>table>tbody>tr>td>img{
+        width: auto;
+        /* Yeap you can change the width and height*/
+        height: 100px;
+      };
+    </style>
+</head>
+
+<body>
+  <script>
+    
+   
+    function goSearch(){
+
+      var title = document.getElementById("search").value;
+      if(title){
+        window.location.href="Search.html?title=" + title ;
+      }else{
+        alert("Invalid!");
+      }
+    }
+    
+  window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const difficulty = urlParams.get('difficulty');
+    //console.log(title); 
+
+  
+
+    //call function
+};
+
+  </script>
+
+<div class = "container text-center">
+      <h3 id = "head"></h3>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Picture</th>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Categories</th>
+            <th scope="col">Price</th>
+            <th scope="col">Add to Cart</th>
+          </tr>
+        </thead>
+        <tbody id = "tableEle">
+          <tr>
+            <td><img src="https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/margherita.90f9451fd66871fb6f9cf7d506053f18.1.jpg?width=550" class="rounded-circle img-fluid"></td>
+            <td>1</td>
+            <td>Classic Cheese</td>
+            <td>Pizza</td>
+            <td>$9.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/1" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/tandoori-paneer.4ef45717e972cf45b43c010e3cde5a22.1.jpg?width=550" class="rounded-circle img-fluid"></td>
+            <td>2</td>
+            <td>Tandoori Paneer</td>
+            <td>Pizza</td>
+            <td>$10.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/2" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/veggie-supreme.bc8dd369182b636ff171077efa53c344.1.jpg?width=550" class="rounded-circle img-fluid"></td>
+            <td>3</td>
+            <td>Veggie Supreme</td>
+            <td>Pizza</td>
+            <td>$9.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/3" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/double-paneer-supreme.3cb382529b41d14d4a041b5cc5e64341.1.jpg?width=550" class="rounded-circle img-fluid"></td>
+            <td>4</td>
+            <td>Double Paneer Supreme</td>
+            <td>Pizza</td>
+            <td>$11.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/4" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://www.marionskitchen.com/wp-content/uploads/2023/02/Asian-Buffalo-Wings-04.jpg" class="rounded-circle img-fluid"></td>
+            <td>5</td>
+            <td>Buffalo wings</td>
+            <td>Appetizer</td>
+            <td>$8.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/5" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://images.themodernproper.com/billowy-turkey/production/posts/2021/Homemade-Mozzarella-Sticks-9.jpeg?w=960&h=960&q=82&fm=jpg&fit=crop&dm=1638935116&s=2574b8da89d966ee167111e9822a0b4e" class="rounded-circle img-fluid"></td>
+            <td>6</td>
+            <td>Mozzarella sticks</td>
+            <td>Appetizer</td>
+            <td>$8.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/6" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://apipics.s3.amazonaws.com/vegan_api/131.jpg" class="rounded-circle img-fluid"></td>
+            <td>7</td>
+            <td>Pret’s chocolate and almond butter cookies</td>
+            <td>Deseert</td>
+            <td>$2.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/7" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://apipics.s3.amazonaws.com/vegan_api/167.jpg" class="rounded-circle img-fluid"></td>
+            <td>8</td>
+            <td>Vegan coconut and mango pavlova</td>
+            <td>Dessert</td>
+            <td>$8.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/8" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://apipics.s3.amazonaws.com/vegan_api/56.jpg" class="rounded-circle img-fluid"></td>
+            <td>9</td>
+            <td>Orange, fennel and pea shoot salad with walnuts</td>
+            <td>Salad</td>
+            <td>$8.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/9" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://apipics.s3.amazonaws.com/vegan_api/207.jpg" class="rounded-circle img-fluid"></td>
+            <td>10</td>
+            <td>Heritage tomato salad</td>
+            <td>Salad</td>
+            <td>$7.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/10" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://apipics.s3.amazonaws.com/vegan_api/104.jpg" class="rounded-circle img-fluid"></td>
+            <td>11</td>
+            <td>Orange, fennel and pea shoot salad with walnuts</td>
+            <td>Salad</td>
+            <td>$8.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/11" method="POST">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtoGOxjDwnkHyGMWN1k9GXFr-JbO4jOxTjsQ&usqp=CAU" class="rounded-circle img-fluid"  alt="drink"></td>
+            <td>12</td>
+            <td>Cola</td>
+            <td>Drink</td>
+            <td>$1.99</td>
+            <td>
+                <form action="/add_to_cart_STATIC/12" method="POST">
+                    <button  class="btn btn-success">Add to Cart</button>
+                </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}

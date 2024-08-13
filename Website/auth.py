@@ -80,38 +80,6 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-@auth.route("/add_to_cart/<int:item_id>", methods=["POST"])
-def add_to_cart(item_id):
-    if current_user.is_authenticated:
-        userId = current_user.id
-        cart_item = Cart.query.filter_by(cartItem_id=item_id, user_id=userId).first()
-
-        # Already Exists, increment item quantity
-        if cart_item:
-            cart_item.quantity += 1
-        else:
-            cart = Cart(user_id=userId, cartItem_id=item_id, quantity=1)
-            db.session.add(cart)
-
-        db.session.commit()  # Commit changes to the database
-    else:
-        flash("You need to log in to add items to your cart", category="danger")
-        return redirect(url_for("auth.login"))
-
-    return redirect(url_for("auth.display_items"))
-
-
-@auth.route("/items")
-def display_items():
-    # Query items from the database
-    items = (
-        # Item.query.all()
-        Item.query.with_entities(Item.id, Item.name, Item.price).all()
-    )
-
-    # Render the HTML template with the items
-    return render_template("items.html", items=items, user=current_user)
-
 
 @auth.route("/admin", methods=["GET", "POST"])
 def admin():
@@ -130,20 +98,18 @@ def admin():
             db.session.commit()
 
             flash("Item added.", category="success")
+    curr_items = Item.query.with_entities(Item.id, Item.name, Item.price).all()
+    return render_template("admin.html", items=curr_items, user=current_user)
 
-    return render_template("admin.html", user=current_user)
 
+@auth.route("/admin_delete_item/<int:item_id>", methods=["POST"])
+def admin_delete_item(item_id):
+    item = Item.query.filter_by(id=item_id).first()
 
-@auth.route("/checkout")
-def checkout():
-    # Fetch cart items for the current user
-    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+    if item:
+            db.session.delete(item)
+            db.session.commit()
+            message = f"Removed item: {item.name}"
+            flash(message, category="success")
 
-    # Create a list of dictionaries containing item details and quantities
-    cart = []
-    for cart_item in cart_items:
-        item = Item.query.get(cart_item.cartItem_id)
-        if item:
-            cart.append({"item_name": item.name, "quantity": cart_item.quantity})
-
-    return render_template("checkout.html", cart=cart, user=current_user)
+    return redirect(url_for('auth.admin'))

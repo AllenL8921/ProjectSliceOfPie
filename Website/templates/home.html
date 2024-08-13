@@ -20,10 +20,56 @@
       /* Yeap you can change the width and height*/
       height: 800px;
     }
+    img{
+      border-radius: 20px;
+    }
+    .full-menu img{
+      width:800px; 
+    }
+    .full-menu {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .full-menu .view-menu-btn {
+      position: absolute;
+      top: 50%;
+      left: 200px;
+      width: 250px;
+      height: 100px;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      background-color: #eb0d0d;
+      color: white;
+      font-size: 18px;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .full-menu .view-menu-btn:hover {
+      background-color: rgb(168, 12, 12);
+    }
+    hr.solid {
+      border-top: 3px solid #bbb;
+    }
   </style>
 </head>
 
 <body>
+  <br>
+
+  <div class="container">
+    <h1 class="header">
+      START YOUR ORDER
+    </h1>
+  </div>
+  <br>
+
+  <hr class="solid">
 
   <!--carousel-->
   <div class="container center">
@@ -85,11 +131,12 @@
     </div><!--carousel-->
   </div> <!-- container-->
 
+  <hr class="solid">
+
   <!--Second-->
   <div class="container">
     <div class="jumbotorn">
       <h1 class="display-4">Cozy Pizza Store!</h1>
-
       <p class="lead"> Welcome to our cozy pizza joint, where every slice tells a delicious story! At our pizzeria, we
         craft each pie with
         passion and precision, using only the finest ingredients sourced locally and internationally. Join us for a
@@ -99,6 +146,22 @@
   </div>
   <br>
 
+  <hr class="solid">
+
+  <!--Third - Full Menu Entrance-->
+  <div class="container">
+    <h1>Browse Our Menu:</h1>
+    <div class="full-menu">
+      <img src="https://latfusa.com/media/uploads/2021/02/01/dominos_game_day_mix_and_match.jpg">
+      <form action="/items">
+        <button class="view-menu-btn">VIEW FULL MENU</button>
+      </form>
+    </div>
+  </div>
+  <br>
+
+  <hr class="solid">
+
   <!--Third - Menu-->
   <div class="container">
     <h1>Menu</h1>
@@ -106,7 +169,7 @@
     <div class="row">
       <div class="col-3">
         <div class="card">
-          <img class="card-img-top" style="height:299px"
+          <img class="card-img-top" style="height:299px; border-radius:10px;"
             src="https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg"
             alt="pizza">
           <h3 class="card-title"> Cheese Pizza</h3>

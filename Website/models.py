@@ -20,6 +20,7 @@ class Item(db.Model):
     price = db.Column(db.Float)
     # addOn = db.Column(db.String(255))
     calories = db.Column(db.Integer)
+    #img_url = db.Column(db.String, nullable=False) 
 
     def __repr__(self):
         return f"{self.name} - {self.price}"

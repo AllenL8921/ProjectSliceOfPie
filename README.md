@@ -16,5 +16,5 @@ To run the project, execute `main.py`. This will start a development server, and
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:AllenL8921/ProjectSliceOfPie.git
    cd <project-directory>
